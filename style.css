@@ -1,149 +1,231 @@
+/* Variáveis para organizar as cores oficiais */
+:root {
+    --vermelho-kitkat: #D10014;
+    --vermelho-escuro: #8a000a;
+    --branco-puro: #ffffff;
+    --cinza-fundo: #f5f5f7;
+    --texto-escuro: #2d2d2d;
+    --texto-claro: #666666;
+    --sombra-suave: 0 8px 24px rgba(0, 0, 0, 0.06);
+    --sombra-hover: 0 16px 32px rgba(209, 0, 20, 0.15);
+    --transicao: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
 /* Reset e Configurações Gerais */
 * {
     margin: 0;
     padding: 0;
-    box-box-sizing: border-box; /* Garante que padding não quebre o layout */
+    box-sizing: border-box; /* Corrigido aqui */
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
+    background-color: var(--cinza-fundo);
+    color: var(--texto-escuro);
     line-height: 1.6;
 }
 
-/* Cabeçalho */
+/* Cabeçalho Fixo (Premium) */
 .cabecalho {
-    background-color: #D10014; /* Vermelho KitKat */
-    color: white;
+    background-color: rgba(209, 0, 20, 0.98); /* Vermelho KitKat com leve transparência */
+    backdrop-filter: blur(10px); /* Efeito de vidro borrado no fundo */
+    color: var(--branco-puro);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 5%;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px 8%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
-.cabecalho-imagem, .cabecalho-alura {
-    width: 80px; /* Tamanho fixo em px costuma funcionar melhor para logos */
+.cabecalho-alura, .cabecalho-imagem {
+    height: 45px;
+    width: auto;
     object-fit: contain;
+    transition: var(--transicao);
+}
+
+.cabecalho-alura:hover, .cabecalho-imagem:hover {
+    transform: scale(1.05);
+}
+
+.cabecalho-lista {
+    display: flex;
+    list-style: none;
 }
 
 .cabecalho-lista-item {
-    display: inline-block;
-    margin: 0 20px;
-    font-size: 18px;
-    font-weight: 500;
+    margin-left: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
     cursor: pointer;
-    transition: color 0.3s ease, transform 0.3s ease;
+    position: relative;
+    transition: var(--transicao);
 }
 
-.cabecalho-lista-item:hover {
-    color: #fcc2c2;
-    transform: translateY(-2px);
+/* Linha decorativa embaixo do menu ao passar o mouse */
+.cabecalho-lista-item::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--branco-puro);
+    transition: var(--transicao);
 }
 
-/* Seção Principal (Escola / KitKat) */
+.cabecalho-lista-item:hover::after {
+    width: 100%;
+}
+
+/* Seção Principal (Hero/Escola) */
 .escola {
-    background: linear-gradient(135deg, #A6000F, #D10014);
-    color: white;
+    background: linear-gradient(135deg, var(--vermelho-escuro), var(--vermelho-kitkat));
+    color: var(--branco-puro);
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    padding: 60px 10%;
+    padding: 80px 12%;
+    gap: 40px;
 }
 
 .escola-div-conteudo {
-    width: 50%;
+    width: 55%;
 }
 
 .escola-titulo {
-    font-size: 38px;
+    font-size: 42px;
     font-weight: 700;
     margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    text-align: left; /* Alinhado à esquerda fica mais moderno em seções hero */
+}
+
+/* Estilo específico para os parágrafos da seção principal */
+.escola-div-conteudo p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 15px;
+    font-size: 16px;
 }
 
 .escola-imagem {
-    width: 25%;
-    max-width: 200px;
-    filter: drop-shadow(2px 4px 8px rgba(0,0,0,0.3));
+    width: 30%;
+    max-width: 250px;
+    filter: drop-shadow(5px 10px 15px rgba(0, 0, 0, 0.4));
+    animation: flutuar 4s ease-in-out infinite; /* Imagem fica flutuando suavemente */
 }
 
-/* Seção Estudantes / Cards */
+/* Seção Vitrine de Produtos */
 .estudante {
-    padding: 60px 5%;
+    padding: 80px 8%;
 }
 
 .estudante-titulo {
     font-size: 32px;
-    color: #A6000F;
-    margin-bottom: 40px;
-    text-align: center;
+    color: var(--vermelho-kitkat);
+    margin-bottom: 50px;
     font-weight: 700;
 }
 
 .estudante-todos {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsivo automático */
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 30px;
-    padding: 20px;
+    padding: 10px;
 }
 
+/* Cards Estilo "Wafer" */
 .estudante-div {
-    background-color: white;
-    border-radius: 15px;
-    padding: 25px 15px;
+    background-color: var(--branco-puro);
+    border-radius: 20px;
+    padding: 30px 20px;
     text-align: center;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: var(--sombra-suave);
+    transition: var(--transicao);
+    border: 1px solid rgba(0, 0, 0, 0.03);
 }
 
 .estudante-div:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 24px rgba(209, 0, 20, 0.15);
+    transform: translateY(-10px);
+    box-shadow: var(--sombra-hover);
 }
 
 .estudante-imagem {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%; /* Deixa a foto redonda */
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
     object-fit: cover;
-    border: 4px solid #D10014;
-    margin-bottom: 15px;
+    border: 4px solid var(--vermelho-kitkat);
+    margin-bottom: 20px;
+    transition: var(--transicao);
 }
 
+.estudante-div:hover .estudante-imagem {
+    transform: scale(1.05);
+}
+
+.estudante-nome {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--texto-escuro);
+}
+
+/* Ícones de Links/Lojas */
 .estudante-icone {
-    width: 30px;
-    margin: 10px 5px 0 5px;
-    cursor: pointer;
-    transition: opacity 0.2s;
+    width: 35px;
+    height: 35px;
+    margin: 5px 8px;
+    padding: 6px;
+    background-color: var(--cinza-fundo);
+    border-radius: 50%;
+    object-fit: contain;
+    transition: var(--transicao);
 }
 
 .estudante-icone:hover {
-    opacity: 0.7;
+    background-color: #ffe5e7;
+    transform: scale(1.2);
 }
 
 /* Rodapé */
 .rodape {
-    background-color: #1e1e1e; /* Um tom escuro deixa o fim da página mais elegante */
-    color: white;
-    padding: 30px 0;
+    background-color: #111111;
+    padding: 40px 0;
     text-align: center;
-    margin-top: 40px;
 }
 
 .rodape-imagem {
-    height: 50px;
-    margin-bottom: 10px;
+    height: 45px;
+    margin: 0 15px;
+    opacity: 0.7;
+    transition: var(--transicao);
 }
 
-/* Tags Gerais */
+.rodape-imagem:hover {
+    opacity: 1;
+}
+
+/* Tags Gerais Gerais */
 p {
     text-align: justify;
-    color: #ffffff;
-    font-size: 16px;
+    color: var(--texto-claro);
 }
 
 h2 {
     text-align: center;
-    font-size: 28px;
+}
+
+/* Animação de Flutuar para a imagem principal */
+@keyframes flutuar {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
 }
