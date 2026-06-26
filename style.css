@@ -69,9 +69,8 @@ body {
 }
 
 .estudante-div img {
-    width: 150px;
-    height: 150px;
     border-radius: 50%;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
 }
 
